@@ -328,17 +328,35 @@ void registrasiMataKuliah() {
 
     TemplateMK pilihanMK[] = {
         {"TC105", "TBO", 3, 2, "Ineke Pakereng"},
-        {"TC112", "IMK", 3, 2, "Sinta "}
+        {"TC112", "IMK", 3, 2, "Sinta"},
+        {"TC120", "RPL", 3, 2, "Yohanes Timotius"},
+        {"TC140", "STRUKTUR DATA", 3, 2, "Novita"}
     };
 
-    JadwalPilihan jadwalPilihan[2][2] = {
+    JadwalPilihan jadwalPilihan[4][4] = {
         {
-            {"TC105B", "TEORI BAHASA DAN OTOMATA", 3, 2, "Senin", "08:00 - 09:40"},
-            {"TC105A", "TEORI BAHASA DAN OTOMATA", 3, 2, "Rabu", "13:00 - 14:40"}
+            {"TC105A", "TEORI BAHASA DAN OTOMATA", 3, 2, "Senin", "08:00 - 09:40"},
+            {"TC105B", "TEORI BAHASA DAN OTOMATA", 3, 2, "Rabu", "13:00 - 14:40"},
+            {"TC105C", "TEORI BAHASA DAN OTOMATA", 3, 2, "Kamis", "10:00 - 11:40"},
+            {"TC105D", "TEORI BAHASA DAN OTOMATA", 3, 2, "Selasa", "15:00 - 16:40"}
         },
         {
-            {"TC112A", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Selasa", "10:00 - 11:40"},
-            {"TC112C", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Kamis", "15:00 - 16:40"}
+            {"TC112A", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Senin", "10:00 - 11:40"},
+            {"TC112B", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Selasa", "08:00 - 09:40"},
+            {"TC112C", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Kamis", "13:00 - 14:40"},
+            {"TC112D", "INTERAKSI MANUSIA DAN KOMPUTER", 3, 2, "Rabu", "10:00 - 11:40"}
+        },
+        {
+            {"TC120A", "REKAYASA PERANGKAT LUNAK", 3, 2, "Senin", "13:00 - 14:40"},
+            {"TC120B", "REKAYASA PERANGKAT LUNAK", 3, 2, "Selasa", "10:00 - 11:40"},
+            {"TC120C", "REKAYASA PERANGKAT LUNAK", 3, 2, "Rabu", "08:00 - 09:40"},
+            {"TC120D", "REKAYASA PERANGKAT LUNAK", 3, 2, "Kamis", "15:00 - 16:40"}
+        },
+        {
+            {"TC140A", "STRUKTUR DATA", 3, 2, "Selasa", "13:00 - 14:40"},
+            {"TC140B", "STRUKTUR DATA", 3, 2, "Rabu", "15:00 - 16:40"},
+            {"TC140C", "STRUKTUR DATA", 3, 2, "Kamis", "08:00 - 09:40"},
+            {"TC140D", "STRUKTUR DATA", 3, 2, "Senin", "15:00 - 16:40"}
         }
     };
 
@@ -394,7 +412,7 @@ void registrasiMataKuliah() {
                 gotoxy(40, 14);
                 garisPanjang();
 
-                for (int j = 0; j < 2; j++) {
+                for (int j = 0; j < 4; j++) {
                     gotoxy(40, 16 + j);
                     printf(pilihanJadwal == j + 1 ? ">> [%s] %s | SKS A:%d B:%d | %s %s"
                            : "   [%s] %s | SKS A:%d B:%d | %s %s",
@@ -406,22 +424,22 @@ void registrasiMataKuliah() {
                            jadwalPilihan[indexMK][j].jam);
                 }
 
-                gotoxy(40, 18);
-                printf(pilihanJadwal == 3 ? ">> Kembali" : "   Kembali");
+                gotoxy(40, 21);
+                printf(pilihanJadwal == 5 ? ">> Kembali" : "   Kembali");
 
                 tombol = getch();
                 if (tombol == 0 || tombol == 224) {
                     tombol = getch();
                     if (tombol == 72) {
-                        pilihanJadwal = (pilihanJadwal == 1) ? 3 : pilihanJadwal - 1;
+                        pilihanJadwal = (pilihanJadwal == 1) ? 5 : pilihanJadwal - 1;
                     } else if (tombol == 80) {
-                        pilihanJadwal = (pilihanJadwal == 3) ? 1 : pilihanJadwal + 1;
+                        pilihanJadwal = (pilihanJadwal == 5) ? 1 : pilihanJadwal + 1;
                     }
                 } else if (tombol == 13) {
-                    if (pilihanJadwal == 3) break;
+                    if (pilihanJadwal == 5) break;
 
                     if (jumlahMK >= MAKS_MK || jumlahJadwal >= MAKS_JADWAL) {
-                        gotoxy(40, 20);
+                        gotoxy(40, 23);
                         printf("Kapasitas mata kuliah atau jadwal penuh.");
                         pauseProgram();
                         return;
@@ -442,7 +460,7 @@ void registrasiMataKuliah() {
                     strcpy(jadwal[jumlahJadwal].jam, jp->jam);
                     jumlahJadwal++;
 
-                    gotoxy(40, 20);
+                    gotoxy(40, 23);
                     printf("Mata kuliah dan jadwal berhasil ditambahkan!");
                     pauseProgram();
                     return;
